@@ -1,0 +1,52 @@
+# Classe Venda, representa uma venda de um produto com quantidade e valor
+class Venda:
+    # Construtor da classe, inicializa uma venda com o produto, quantidade e valor unitário
+    def __init__(self, produto, quantidade, valor):
+        self.produto = produto          # Atributo 'produto' armazena o nome do produto
+        self.quantidade = quantidade    # Atributo 'quantidade' armazena a quantidade do produto vendido
+        self.valor = valor              # Atributo 'valor' armazena o valor unitário do produto
+
+# Classe Relatorio, armazena e processa um conjunto de vendas
+class Relatorio:
+    # Construtor da classe, inicializa a lista de vendas vazia
+    def __init__(self):
+        self.vendas = []                # Atributo 'vendas' armazena todas as vendas adicionadas
+
+    # Método para adicionar uma venda ao relatório
+    def adicionar_venda(self, venda):
+        # Verifica se o objeto fornecido é uma instância da classe Venda antes de adicioná-lo
+        if isinstance(venda, Venda):
+            self.vendas.append(venda)   # Adiciona a venda à lista de vendas
+
+    # Método para calcular o total de vendas somando os valores de todas as vendas
+    def calcular_total_vendas(self):
+        total = 0                       # Variável 'total' armazena o total acumulado das vendas
+        for venda in self.vendas:       # Percorre cada venda na lista de vendas
+            # Calcula o total de cada venda (quantidade * valor) e adiciona ao total acumulado
+            total += venda.quantidade * venda.valor         
+        return total                    # Retorna o valor total das vendas
+
+# Função principal, responsável por executar o programa
+def main():
+    # Cria um objeto Relatorio para armazenar as vendas
+    relatorio = Relatorio()
+
+    # Lê 3 vendas do usuário
+    for i in range(3):
+        #print("produto:")
+        produto = input().strip()          # Recebe o nome do produto como uma string
+        #print("quantidade:")
+        quantidade = int(input())          # Recebe a quantidade como um número inteiro
+        #print("valor:")
+        valor = float(input())             # Recebe o valor unitário como um número de ponto flutuante
+        # Cria um objeto Venda com os dados fornecidos e adiciona ao relatório
+        venda = Venda(produto, quantidade, valor)
+        relatorio.adicionar_venda(venda)   # Adiciona a venda ao relatório
+
+    # Calcula e exibe o total de vendas no relatório
+    total_vendas = relatorio.calcular_total_vendas()
+    print(f"Total de Vendas: {total_vendas}")
+
+# Executa a função principal se o script for executado diretamente
+if __name__ == "__main__":
+    main()
